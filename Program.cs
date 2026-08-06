@@ -75,24 +75,20 @@ class EightQueens
     public void PrintResult()
     {
         Console.WriteLine("----------------");
-        for (int i = 1; i <= solutions.Count; i++)
-        {
-            int[,] board = solutions[i - 1];
 
-            Console.Write($"//Solution {i}");
-            Console.WriteLine();
+        for (int i = 0; i < solutions.Count; i++)
+        {
+            int[,] board = solutions[i];
+
+            Console.WriteLine($"//Solution {i + 1}");
 
             for (int row = 0; row < 8; row++)
             {
                 for (int col = 0; col < 8; col++)
                 {
-
-                    if (board[row, col] == 1)
-                        Console.Write("Q");
-                    else
-                        Console.Write(".");
-                    Console.Write(" ");
+                    Console.Write(board[row, col] == 1 ? "Q " : ". ");
                 }
+
                 Console.WriteLine();
             }
 
