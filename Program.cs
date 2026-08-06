@@ -1,28 +1,19 @@
-﻿Console.WriteLine("Start");
-var solver = new EightQueens();
+﻿var solver = new EightQueens();
 solver.Main();
 
 class EightQueens
 {
     // 八皇后是二維陣列，我要找出所有解，所以再用一個 List 裝
-    // 從 [0, 0] 開始，由上到下找出所有解，所以可以使用 DFS
-    // Main 跑棋盤迴圈跟給解
-    // Validate 驗證有效性
     List<int[,]> solutions = new List<int[,]>();
-    int solutionCount = 0;
 
     public void Main()
     {
-        // 以第一列為 root
-        for (int i = 0; i < 8; i++)
-        {
-            int[,] board = new int[8, 8];
-            board[0, i] = 1;
-            // 從第二列開始找
-            DFS(board, 1);
-        }
+        int[,] board = new int[8, 8];
 
-        Console.Write($"共：{solutionCount}組解");
+        // 從 [0, 0] 開始，由上到下找出所有解，所以可以使用 DFS
+        DFS(board, 0);
+
+        Console.Write($"共：{solutions.Count}組解");
         Console.WriteLine();
 
         PrintResult();
@@ -34,7 +25,6 @@ class EightQueens
         if (row == 8)
         {
             solutions.Add((int[,])board.Clone());
-            solutionCount++;
             return;
         }
 
@@ -85,19 +75,19 @@ class EightQueens
     public void PrintResult()
     {
         Console.WriteLine("----------------");
-        for(int i = 1 ; i <= solutionCount; i++)
+        for (int i = 1; i <= solutions.Count; i++)
         {
             int[,] board = solutions[i - 1];
 
             Console.Write($"//Solution {i}");
             Console.WriteLine();
 
-            for(int row = 0; row < 8; row++)
+            for (int row = 0; row < 8; row++)
             {
-                for(int col = 0; col < 8; col++)
+                for (int col = 0; col < 8; col++)
                 {
-                    
-                    if(board[row, col] == 1)
+
+                    if (board[row, col] == 1)
                         Console.Write("Q");
                     else
                         Console.Write(".");
